@@ -7,8 +7,17 @@
   border: 1px solid black;
   padding: 5px;
   text-align: center;
+  height: 16px;
+  width: 16px;
 }
 
 .selected {
   background-color: #d6d6d6;
+}
+
+
+.selection {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }

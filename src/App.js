@@ -12,18 +12,8 @@ function App() {
     "Sunday",
   ];
   const timeSlots = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "11",
-    "12",
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 15, 17, 18, 19, 20, 21,
+    22, 23, 24,
   ];
   const [selectedSlots, setSelectedSlots] = useState([]);
   const [isSelecting, setIsSelecting] = useState(false);
@@ -50,7 +40,7 @@ function App() {
         newSelectedSlots.push({ day: days[d], timeSlot: timeSlots[t] });
       }
     }
-    console.log('newSelectedSlots', newSelectedSlots)
+    console.log("newSelectedSlots", newSelectedSlots);
     setSelectedSlots(newSelectedSlots);
   };
 
@@ -64,23 +54,22 @@ function App() {
       <thead>
         <tr>
           <th></th>
-          <th colSpan="12">AM</th>
-          <th colSpan="12">PM</th>
+          <th className="time-slot" colSpan="12">AM</th>
+          <th className="time-slot" colSpan="12">PM</th>
         </tr>
         <tr>
           <th></th>
           {timeSlots.map((slot, index) => (
-            <th key={index}>{slot}</th>
-          ))}
-          {timeSlots.map((slot, index) => (
-            <th key={index + timeSlots.length}>{slot}</th>
+            <th key={index} className="time-slot">
+              {index < 12 ? slot : index === 23 ? 12 : slot % 12}
+            </th>
           ))}
         </tr>
       </thead>
       <tbody>
         {days.map((day, index) => (
           <tr key={index}>
-            <td>{day}</td>
+            <td className="selection time-slot">{day}</td>
             {timeSlots.map((timeSlot, index) => {
               const isSelected = selectedSlots.some(
                 (slot) => slot.day === day && slot.timeSlot === timeSlot
@@ -88,19 +77,6 @@ function App() {
               return (
                 <td
                   key={index}
-                  className={isSelected ? "selected time-slot" : "time-slot"}
-                  onMouseDown={() => handleMouseDown(day, timeSlot)}
-                  onMouseEnter={() => handleMouseEnter(day, timeSlot)}
-                ></td>
-              );
-            })}
-            {timeSlots.map((timeSlot, index) => {
-              const isSelected = selectedSlots.some(
-                (slot) => slot.day === day && slot.timeSlot === timeSlot
-              );
-              return (
-                <td
-                  key={index + timeSlots.length}
                   className={isSelected ? "selected time-slot" : "time-slot"}
                   onMouseDown={() => handleMouseDown(day, timeSlot)}
                   onMouseEnter={() => handleMouseEnter(day, timeSlot)}
